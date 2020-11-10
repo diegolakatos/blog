@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meu blog</title>
-    <link>https://example.com/pt-br/</link>
-    <description>Recent content on Meu blog</description>
+    <title>Diego V Lakatos</title>
+    <link>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/</link>
+    <description>Recent content on Diego V Lakatos</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://example.com/pt-br/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/about/</link>
+      <pubDate>Mon, 09 Nov 2020 11:11:04 +0000</pubDate>
+      
+      <guid>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/about/</guid>
+      <description>Teste BR</description>
+    </item>
+    
   </channel>
 </rss>

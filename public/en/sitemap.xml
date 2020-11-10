@@ -3,44 +3,44 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/categories/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/categories/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/categories/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/"
                 />
   </url>
   
   <url>
-    <loc>https://example.com/tags/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/tags/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/tags/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/tags/"
                 />
   </url>
   

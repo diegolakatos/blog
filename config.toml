@@ -1,4 +1,4 @@
-baseURL = "https://determined-ardinghelli-91a6ea.netlify.app"
+baseURL = "https://diegovlakatos.cloud"
 languageCode = "en"
 DefaultContentLanguage = "en"
 title = "Diego Verissimo Lakatos' blog"
@@ -8,7 +8,7 @@ enableEmoji = true
 enableRobotsTXT = true
 
 # Enable Disqus
-#disqusShortname = ""
+disqusShortname = "diegovlakatos-cloud.disqus.com"
 
 # Google Analytics
 #googleAnalytics = "UA-123-45"
@@ -92,3 +92,21 @@ url = "mailto:diegovlakatos@gmail.com"
   weight = 300
   identifier = "about"
   url = "/about/"
+
+ [[Languages.pt-br.menu.main]]
+ url    = "/pt-br/"
+ identifier = "home"
+ name   = "Pagina Inicial"
+ weight = 100
+
+ [[Languages.pt-br.menu.main]]
+ name = "Posts"
+ weight = 200
+ identifier = "posts"
+ url = "/pt-br/post/"
+
+ [[Languages.pt-br.menu.main]]
+ name = "Sobre"
+ weight = 300
+ identifier = "about"
+ url = "/pt-br/about/"

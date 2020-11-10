@@ -3,44 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/pt-br/categories/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/about/</loc>
+    <lastmod>2020-11-09T11:11:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/categories/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/categories/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://example.com/pt-br/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/"
                 />
   </url>
   
   <url>
-    <loc>https://example.com/pt-br/tags/</loc>
+    <loc>https://determined-ardinghelli-91a6ea.netlify.app/pt-br/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/tags/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://example.com/pt-br/tags/"
+                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/tags/"
                 />
   </url>
   
