@@ -10,9 +10,9 @@ If a team is already using Terraform to create and manage the infrastructure it 
 - A single workflow to administer both the underlying infrastructure and the cluster itself
 - Easly templating without the need to use tools like ``helm``, 
 - Lifecycle management without the need to check the Kubernetes' API
-- Terraform is capable of understanding the relationship between resources so if yo
+- Terraform is capable of understanding the relationship between resources, if a resource has dependencies that failed to create Terraform will understand this and don't create the resource
 
-
+With all these considerations done let's start working. The first step is to configure the kubernetes provider:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 terraform {
@@ -26,7 +26,7 @@ terraform {
 provider "kubernetes" {}
 {{< / highlight >}}
 
-Then let's create a pod
+Now to create  a pod we can use the following file:
 
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
@@ -44,3 +44,24 @@ resource "kubernetes_pod" "pod" {
 
 }
 {{< / highlight >}}
+
+To apply it just run:
+
+{{< highlight bash "linenos=table,linenostart=1">}}
+$ terraform apply
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+kubernetes_pod.pod: Creating...
+kubernetes_pod.pod: Creation complete after 2s [id=default/pod]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+{{< / highlight >}}
+
