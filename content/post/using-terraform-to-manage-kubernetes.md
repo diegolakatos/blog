@@ -124,6 +124,10 @@ resource "kubernetes_deployment" "webapplication-deploy" {
 resource "kubernetes_service" "webapplication-service" {
   metadata {
     name = "webapplication-service"
+    labels = {
+          team = "42"
+          app = "frontend"
+        }
   }
   spec {
     selector = {
@@ -136,5 +140,91 @@ resource "kubernetes_service" "webapplication-service" {
 
     type = "NodePort"
   }
+  depends_on = [ kubernetes_namespace.webapplication-namespace ]
 }
 {{< / highlight >}}
+
+Since all resources have the same labels we can use the ```kubectl``` command to inspect the state of the cluster before and after the ``terraform apply``:
+
+{{< highlight bash >}}
+$ kubectl get all --all-namespaces -l team=42
+No resources found
+
+$ kubectl get ns
+NAME              STATUS   AGE
+default           Active   160d
+kube-node-lease   Active   160d
+kube-public       Active   160d
+kube-system       Active   160d
+{{< / highlight >}}
+
+now to create the resources:
+
+{{< highlight bash >}}
+$ terraform apply -auto-approve
+kubernetes_pod.pod: Refreshing state... [id=default/pod]
+kubernetes_namespace.webapplication-namespace: Creating...
+kubernetes_namespace.webapplication-namespace: Creation complete after 0s [id=webapplication]
+kubernetes_service.webapplication-service: Creating...
+kubernetes_service.webapplication-service: Creation complete after 0s [id=default/webapplication-service]
+kubernetes_deployment.webapplication-deploy: Creating...
+kubernetes_deployment.webapplication-deploy: Creation complete after 4s [id=webapplication/webapplication]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+{{< / highlight >}}
+
+To confirm the creation:
+{{< highlight bash >}}
+kubectl get all --all-namespaces -l team=42
+NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
+webapplication   pod/webapplication-7f8849d748-pp4hf   1/1     Running   0          64s
+webapplication   pod/webapplication-7f8849d748-q5xn2   1/1     Running   0          64s
+webapplication   pod/webapplication-7f8849d748-qftfb   1/1     Running   0          64s
+
+NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+default     service/webapplication-service   NodePort   10.106.237.85   <none>        8080:31770/TCP   65s
+
+NAMESPACE        NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+webapplication   deployment.apps/webapplication   3/3     3            3           64s
+
+NAMESPACE        NAME                                        DESIRED   CURRENT   READY   AGE
+webapplication   replicaset.apps/webapplication-7f8849d748   3         3         3       64s
+
+kubectl get ns               
+NAME              STATUS   AGE
+default           Active   160d
+kube-node-lease   Active   160d
+kube-public       Active   160d
+kube-system       Active   160d
+webapplication    Active   106s
+{{< / highlight >}}
+
+As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself. 
+Suppose that we want to delete all the resources that we just create using the ``kubectl`` command, if we we delete the namespace the deployment would also be deleted because it can't exist without the namespace however the service is not dependent therefore would not be deleted:
+
+{{< highlight bash >}}
+$ kubectl get all --all-namespaces -l team=42                             
+NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
+webapplication   pod/webapplication-7f8849d748-5hs7v   1/1     Running   0          7m57s
+webapplication   pod/webapplication-7f8849d748-nbqxf   1/1     Running   0          7m57s
+webapplication   pod/webapplication-7f8849d748-t6wc2   1/1     Running   0          7m57s
+
+NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m8s
+
+NAMESPACE        NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+webapplication   deployment.apps/webapplication   3/3     3            3           8m8s
+
+NAMESPACE        NAME                                        DESIRED   CURRENT   READY   AGE
+webapplication   replicaset.apps/webapplication-7f8849d748   3         3         3       7m57s
+
+$ kubectl delete ns webapplication
+namespace "webapplication" deleted
+
+$ kubectl get all --all-namespaces -l team=42
+NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m34s
+{{< / highlight >}}
+
+
+In our case we have a declared dependency between the service that exposes our application and the namespace
