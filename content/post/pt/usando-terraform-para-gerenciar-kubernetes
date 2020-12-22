@@ -1,9 +1,15 @@
 ---
+title: "Usando Terraform Para Gerenciar Kubernetes"
+date: 2020-12-19T11:16:44Z
+draft: true
+---
+---
 title: "Using Terraform to manage Kubernetes"
 date: 2020-11-30T12:31:10Z
 draft: false
 ---
-When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use ```kubectl``` to create/update the object.
+Ao trabalhar com kubernetes, a maneira padrão de criar objetos tais quais *pods*, *deployments* e *services* é criar um arquivo de manifesto, normalmente em yaml, que descreva o estado desejado e, em seguida, usar `` `kubectl``` para realizar a criação ou atualização o objeto.
+When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use ```kubectl``` to create the object.
 Althought, straightforward this process might create a barrier for developers and operations teams that now have to mantain a new codebase in a new "language". YAML is easy to read but troubleshooting it might be difficult due the need for correct identation and the errors that are exibithed by ```kubectl``` might not be easily understood.
 If a team is already using Terraform to create and manage the infrastructure it makes sense to use it to create the objects inside kubernetes as well, this brings some advantages such as:
 

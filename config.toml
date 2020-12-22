@@ -62,7 +62,7 @@ url = "mailto:diegovlakatos@gmail.com"
   weight = 1
   LanguageName = "English"
 
-  [Languages.pt-br]
+  [Languages.pt]
   title = "Diego V Lakatos"
   description = "Blog sobre DevOps, Cloud Computing, Linux e tecnologias correlatas"
   weight = 2
@@ -93,20 +93,20 @@ url = "mailto:diegovlakatos@gmail.com"
   identifier = "about"
   url = "/about/"
 
- [[Languages.pt-br.menu.main]]
- url    = "/pt-br/"
+ [[Languages.pt.menu.main]]
+ url    = "/pt/"
  identifier = "home"
  name   = "Pagina Inicial"
  weight = 100
 
- [[Languages.pt-br.menu.main]]
+ [[Languages.pt.menu.main]]
  name = "Posts"
  weight = 200
  identifier = "posts"
- url = "/pt-br/post/"
+ url = "/pt/post/"
 
- [[Languages.pt-br.menu.main]]
+ [[Languages.pt.menu.main]]
  name = "Sobre"
  weight = 300
  identifier = "about"
- url = "/pt-br/about/"
+ url = "/pt/about/"
