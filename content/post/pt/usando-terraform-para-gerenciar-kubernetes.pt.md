@@ -3,22 +3,17 @@ title: "Usando Terraform Para Gerenciar Kubernetes"
 date: 2020-12-19T11:16:44Z
 draft: true
 ---
----
-title: "Using Terraform to manage Kubernetes"
-date: 2020-11-30T12:31:10Z
-draft: false
----
-Ao trabalhar com kubernetes, a maneira padrão de criar objetos tais quais *pods*, *deployments* e *services* é criar um arquivo de manifesto, normalmente em yaml, que descreva o estado desejado e, em seguida, usar `` `kubectl``` para realizar a criação ou atualização o objeto.
-When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use ```kubectl``` to create the object.
-Althought, straightforward this process might create a barrier for developers and operations teams that now have to mantain a new codebase in a new "language". YAML is easy to read but troubleshooting it might be difficult due the need for correct identation and the errors that are exibithed by ```kubectl``` might not be easily understood.
-If a team is already using Terraform to create and manage the infrastructure it makes sense to use it to create the objects inside kubernetes as well, this brings some advantages such as:
+Ao trabalhar com kubernetes, a maneira padrão de criar objetos tais quais *pods*, *deployments* e *services* é criar um arquivo de manifesto, normalmente em yaml, que descreva o estado desejado e, em seguida, usar ```kubectl``` para realizar a criação ou atualização o objeto.
 
-- A single workflow to administer both the underlying infrastructure and the cluster itself
-- Easly templating without the need to use tools like ``helm``, 
-- Lifecycle management without the need to check the Kubernetes' API
-- Terraform is capable of understanding the relationship between resources, if a resource has dependencies that failed to create Terraform will understand this and don't create the resource or if you delete an object that has dependencies the dependencies will also be deleted.
+Apesar de tudo, esse processo simples pode criar uma barreira para desenvolvedores e equipes de operações que agora precisam manter uma nova base de código em uma nova "linguagem". O YAML é fácil de ler, mas solucionar o problema pode ser difícil devido à necessidade de identificação correta e os erros exibidos pelo ```kubectl``` podem não ser facilmente compreendidos.
+Se uma equipe já está usando o Terraform para criar e gerenciar a infraestrutura, faz sentido usá-lo para criar os objetos dentro do kubernetes, isso traz algumas vantagens, como:
 
-With all these considerations done let's start working. The first step is to configure the kubernetes provider:
+- Um único fluxo de trabalho para administrar a infraestrutura subjacente e o próprio cluster
+- Modelagem fácil sem a necessidade de usar ferramentas como o ``helm``,
+- Gerenciamento do ciclo de vida sem a necessidade de verificar a API do Kubernetes
+- O Terraform é capaz de entender a relação entre recursos, se um recurso tiver dependências que não conseguiram criar o Terraform entenderá isso e não criar o recurso ou se você excluir um objeto que possui dependências, as dependências também serão excluídas.
+
+Feitas todas essas considerações, vamos começar a trabalhar. A primeira etapa é configurar o *provider* do kubernetes:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 terraform {
@@ -32,8 +27,7 @@ terraform {
 provider "kubernetes" {}
 {{< / highlight >}}
 
-Now to create  a pod we can use the following file:
-
+Agora, para criar um *pod*, podemos usar o seguinte arquivo:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 resource "kubernetes_pod" "pod" {
@@ -51,7 +45,7 @@ resource "kubernetes_pod" "pod" {
 }
 {{< / highlight >}}
 
-To apply it just run:
+Para aplicá-lo, basta executar:
 
 {{< highlight bash "linenos=table,linenostart=1">}}
 $ terraform apply
@@ -71,7 +65,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 {{< / highlight >}}
 
-It's also possible to create more elaborated structures, in the next example we are going to explore the dependency graph that Terraform uses to manage the resources, for this we are going to create 3 objects: one namespace, one deployment and one service:
+Também é possível criar estruturas mais elaboradas, no próximo exemplo vamos explorar o grafo de dependências que o Terraform usa para gerenciar os recursos, para isso vamos criar 3 objetos: um namespace, um *deployment* e um *service*:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 resource "kubernetes_namespace" "webapplication-namespace" {
@@ -112,7 +106,7 @@ resource "kubernetes_deployment" "webapplication-deploy" {
       metadata {
         labels = {
           team = "42"
-          app = "frontend"
+          app  = "frontend"
         }
       }
 
@@ -121,19 +115,19 @@ resource "kubernetes_deployment" "webapplication-deploy" {
           image = "nginx:1.19.4-alpine"
           name  = "frontend-app"
 
-          }
         }
       }
     }
   }
+}
 
 resource "kubernetes_service" "webapplication-service" {
   metadata {
     name = "webapplication-service"
     labels = {
-          team = "42"
-          app = "frontend"
-        }
+      team = "42"
+      app  = "frontend"
+    }
   }
   spec {
     selector = {
@@ -142,15 +136,10 @@ resource "kubernetes_service" "webapplication-service" {
     port {
       port        = 8080
       target_port = 80
-    }
 
-    type = "NodePort"
-  }
-  depends_on = [ kubernetes_namespace.webapplication-namespace ]
-}
 {{< / highlight >}}
 
-Since all resources have the same labels we can use the ```kubectl``` command to inspect the state of the cluster before and after the ``terraform apply``:
+Como todos os recursos têm os mesmos rótulos, podemos usar o comando ```kubectl``` para inspecionar o estado do cluster antes e depois do ``terraform apply``
 
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
@@ -164,7 +153,7 @@ kube-public       Active   160d
 kube-system       Active   160d
 {{< / highlight >}}
 
-now to create the resources:
+agora para criar os objetos:
 
 {{< highlight bash >}}
 $ terraform apply -auto-approve
@@ -179,9 +168,9 @@ kubernetes_deployment.webapplication-deploy: Creation complete after 4s [id=weba
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 {{< / highlight >}}
 
-To confirm the creation:
+Para confirmar a criação:
 {{< highlight bash >}}
-kubectl get all --all-namespaces -l team=42
+$ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
 webapplication   pod/webapplication-7f8849d748-pp4hf   1/1     Running   0          64s
 webapplication   pod/webapplication-7f8849d748-q5xn2   1/1     Running   0          64s
@@ -196,7 +185,7 @@ webapplication   deployment.apps/webapplication   3/3     3            3        
 NAMESPACE        NAME                                        DESIRED   CURRENT   READY   AGE
 webapplication   replicaset.apps/webapplication-7f8849d748   3         3         3       64s
 
-kubectl get ns               
+$ kubectl get ns
 NAME              STATUS   AGE
 default           Active   160d
 kube-node-lease   Active   160d
@@ -205,11 +194,11 @@ kube-system       Active   160d
 webapplication    Active   106s
 {{< / highlight >}}
 
-As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself. 
-Suppose that we want to delete all the resources that we just create using the ``kubectl`` command, if we we delete the namespace the deployment would also be deleted because it can't exist without the namespace however the service is not dependent therefore would not be deleted:
+Conforme mencionado antes, o Terraform é capaz de entender as relações entre diferentes recursos, isso nos permitirá excluir completamente todos os recursos que criamos com um único comando, mesmo nos casos em que o kubernetes não excluiria por si mesmo.
+Suponha que desejamos excluir todos os recursos que acabamos de criar usando o  ``kubectl``, se excluirmos o *namespace*, o *deployment* também será excluída porque um *deployment* não pode existir sem o *namespace*, entretanto o serviço não depende da existencia do namespace, portanto não seria excluído:
 
 {{< highlight bash >}}
-$ kubectl get all --all-namespaces -l team=42                             
+$ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
 webapplication   pod/webapplication-7f8849d748-5hs7v   1/1     Running   0          7m57s
 webapplication   pod/webapplication-7f8849d748-nbqxf   1/1     Running   0          7m57s
@@ -232,5 +221,6 @@ NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL
 default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m34s
 {{< / highlight >}}
 
+Como
 
 In our case we have a declared dependency between the service that exposes our application and the namespace

@@ -8,7 +8,7 @@ Althought, straightforward this process might create a barrier for developers an
 If a team is already using Terraform to create and manage the infrastructure it makes sense to use it to create the objects inside kubernetes as well, this brings some advantages such as:
 
 - A single workflow to administer both the underlying infrastructure and the cluster itself
-- Easly templating without the need to use tools like ``helm``, 
+- Easly templating without the need to use tools like ``helm``,
 - Lifecycle management without the need to check the Kubernetes' API
 - Terraform is capable of understanding the relationship between resources, if a resource has dependencies that failed to create Terraform will understand this and don't create the resource or if you delete an object that has dependencies the dependencies will also be deleted.
 
@@ -106,7 +106,7 @@ resource "kubernetes_deployment" "webapplication-deploy" {
       metadata {
         labels = {
           team = "42"
-          app = "frontend"
+          app  = "frontend"
         }
       }
 
@@ -115,19 +115,19 @@ resource "kubernetes_deployment" "webapplication-deploy" {
           image = "nginx:1.19.4-alpine"
           name  = "frontend-app"
 
-          }
         }
       }
     }
   }
+}
 
 resource "kubernetes_service" "webapplication-service" {
   metadata {
     name = "webapplication-service"
     labels = {
-          team = "42"
-          app = "frontend"
-        }
+      team = "42"
+      app  = "frontend"
+    }
   }
   spec {
     selector = {
@@ -140,7 +140,7 @@ resource "kubernetes_service" "webapplication-service" {
 
     type = "NodePort"
   }
-  depends_on = [ kubernetes_namespace.webapplication-namespace ]
+  depends_on = [kubernetes_namespace.webapplication-namespace]
 }
 {{< / highlight >}}
 
@@ -190,7 +190,7 @@ webapplication   deployment.apps/webapplication   3/3     3            3        
 NAMESPACE        NAME                                        DESIRED   CURRENT   READY   AGE
 webapplication   replicaset.apps/webapplication-7f8849d748   3         3         3       64s
 
-kubectl get ns               
+$ kubectl get ns
 NAME              STATUS   AGE
 default           Active   160d
 kube-node-lease   Active   160d
@@ -199,11 +199,11 @@ kube-system       Active   160d
 webapplication    Active   106s
 {{< / highlight >}}
 
-As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself. 
+As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself.
 Suppose that we want to delete all the resources that we just create using the ``kubectl`` command, if we we delete the namespace the deployment would also be deleted because it can't exist without the namespace however the service is not dependent therefore would not be deleted:
 
 {{< highlight bash >}}
-$ kubectl get all --all-namespaces -l team=42                             
+$ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
 webapplication   pod/webapplication-7f8849d748-5hs7v   1/1     Running   0          7m57s
 webapplication   pod/webapplication-7f8849d748-nbqxf   1/1     Running   0          7m57s
