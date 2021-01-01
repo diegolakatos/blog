@@ -1,7 +1,11 @@
 ---
 title: "Using Terraform to manage Kubernetes"
-date: 2020-11-30T12:31:10Z
+date: 2021-01-01T00:00:00Z
 draft: false
+DisableComments: false
+Description: "This post shows how to use Terraform to manage Kubernetes clusters"
+Tags: [Terraform, Kubernetes, IaC, Containers]
+Categories: [IaC]
 ---
 When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use ```kubectl``` to create/update the object.
 Althought, straightforward this process might create a barrier for developers and operations teams that now have to mantain a new codebase in a new "language". YAML is easy to read but troubleshooting it might be difficult due the need for correct identation and the errors that are exibithed by ```kubectl``` might not be easily understood.
@@ -175,7 +179,7 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
 To confirm the creation:
 {{< highlight bash >}}
-kubectl get all --all-namespaces -l team=42
+$ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
 webapplication   pod/webapplication-7f8849d748-pp4hf   1/1     Running   0          64s
 webapplication   pod/webapplication-7f8849d748-q5xn2   1/1     Running   0          64s
@@ -200,7 +204,7 @@ webapplication    Active   106s
 {{< / highlight >}}
 
 As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself.
-Suppose that we want to delete all the resources that we just create using the ``kubectl`` command, if we we delete the namespace the deployment would also be deleted because it can't exist without the namespace however the service is not dependent therefore would not be deleted:
+Suppose that we want to delete the webapplication namespace and all the resources that have any kind of association with it, if we run  ``kubectl delete ns webapplication`` command the namespace and the deployment will be deleted, however the service that was created in another namespace won't be affected:
 
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
@@ -226,5 +230,223 @@ NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL
 default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m34s
 {{< / highlight >}}
 
+But on our Terraform code we explicit dependence between the namespace and the service, therefore it's possible to delete everything in one command:
 
-In our case we have a declared dependency between the service that exposes our application and the namespace
+{{< highlight bash >}}
+$ kubectl get all --all-namespaces -l team=42
+NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
+webapplication   pod/webapplication-7f8849d748-5hs7v   1/1     Running   0          7m57s
+webapplication   pod/webapplication-7f8849d748-nbqxf   1/1     Running   0          7m57s
+webapplication   pod/webapplication-7f8849d748-t6wc2   1/1     Running   0          7m57s
+
+NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m8s
+
+NAMESPACE        NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+webapplication   deployment.apps/webapplication   3/3     3            3           8m8s
+
+NAMESPACE        NAME                                        DESIRED   CURRENT   READY   AGE
+webapplication   replicaset.apps/webapplication-7f8849d748   3         3         3       7m57s
+
+$ terraform destroy -target=kubernetes_namespace.webapplication-namespace
+kubernetes_namespace.webapplication-namespace: Refreshing state... [id=webapplication]
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # kubernetes_deployment.webapplication-deploy will be destroyed
+  - resource "kubernetes_deployment" "webapplication-deploy" {
+      - id               = "webapplication/webapplication" -> null
+      - wait_for_rollout = true -> null
+
+      - metadata {
+          - generation       = 1 -> null
+          - labels           = {
+              - "app"  = "frontend"
+              - "team" = "42"
+            } -> null
+          - name             = "webapplication" -> null
+          - namespace        = "webapplication" -> null
+          - resource_version = "1742605" -> null
+          - self_link        = "/apis/apps/v1/namespaces/webapplication/deployments/webapplication" -> null
+          - uid              = "c11ffac3-fe6c-49c6-9955-f7e9acbd6e87" -> null
+        }
+
+      - spec {
+          - min_ready_seconds         = 0 -> null
+          - paused                    = false -> null
+          - progress_deadline_seconds = 600 -> null
+          - replicas                  = 3 -> null
+          - revision_history_limit    = 10 -> null
+
+          - selector {
+              - match_labels = {
+                  - "app"  = "frontend"
+                  - "team" = "42"
+                } -> null
+            }
+
+          - strategy {
+              - type = "RollingUpdate" -> null
+
+              - rolling_update {
+                  - max_surge       = "25%" -> null
+                  - max_unavailable = "25%" -> null
+                }
+            }
+
+          - template {
+              - metadata {
+                  - generation = 0 -> null
+                  - labels     = {
+                      - "app"  = "frontend"
+                      - "team" = "42"
+                    } -> null
+                }
+
+              - spec {
+                  - active_deadline_seconds          = 0 -> null
+                  - automount_service_account_token  = false -> null
+                  - dns_policy                       = "ClusterFirst" -> null
+                  - enable_service_links             = true -> null
+                  - host_ipc                         = false -> null
+                  - host_network                     = false -> null
+                  - host_pid                         = false -> null
+                  - restart_policy                   = "Always" -> null
+                  - share_process_namespace          = false -> null
+                  - termination_grace_period_seconds = 30 -> null
+
+                  - container {
+                      - image                      = "nginx:1.19.4-alpine" -> null
+                      - image_pull_policy          = "IfNotPresent" -> null
+                      - name                       = "frontend-app" -> null
+                      - stdin                      = false -> null
+                      - stdin_once                 = false -> null
+                      - termination_message_path   = "/dev/termination-log" -> null
+                      - termination_message_policy = "File" -> null
+                      - tty                        = false -> null
+
+                      - resources {
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+  # kubernetes_namespace.webapplication-namespace will be destroyed
+  - resource "kubernetes_namespace" "webapplication-namespace" {
+      - id = "webapplication" -> null
+
+      - metadata {
+          - annotations      = {
+              - "name" = "webapplication"
+            } -> null
+          - generation       = 0 -> null
+          - labels           = {
+              - "team" = "42"
+            } -> null
+          - name             = "webapplication" -> null
+          - resource_version = "1742545" -> null
+          - self_link        = "/api/v1/namespaces/webapplication" -> null
+          - uid              = "0d0e53a4-8d2d-4b31-8557-af680a54629a" -> null
+        }
+    }
+
+  # kubernetes_service.webapplication-service will be destroyed
+  - resource "kubernetes_service" "webapplication-service" {
+      - id                    = "default/webapplication-service" -> null
+      - load_balancer_ingress = [] -> null
+
+      - metadata {
+          - annotations      = {} -> null
+          - generation       = 0 -> null
+          - labels           = {
+              - "app"  = "frontend"
+              - "team" = "42"
+            } -> null
+          - name             = "webapplication-service" -> null
+          - namespace        = "default" -> null
+          - resource_version = "1742550" -> null
+          - self_link        = "/api/v1/namespaces/default/services/webapplication-service" -> null
+          - uid              = "5d35f7aa-f825-4e00-aec8-a76f13d80ce2" -> null
+        }
+
+      - spec {
+          - cluster_ip                  = "10.152.183.63" -> null
+          - external_ips                = [] -> null
+          - external_traffic_policy     = "Cluster" -> null
+          - health_check_node_port      = 0 -> null
+          - load_balancer_source_ranges = [] -> null
+          - publish_not_ready_addresses = false -> null
+          - selector                    = {
+              - "app" = "kubernetes_deployment.webapplication-deploy.metadata.labels.app"
+            } -> null
+          - session_affinity            = "None" -> null
+          - type                        = "NodePort" -> null
+
+          - port {
+              - node_port   = 30127 -> null
+              - port        = 8080 -> null
+              - protocol    = "TCP" -> null
+              - target_port = "80" -> null
+            }
+        }
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+
+Warning: Resource targeting is in effect
+
+You are creating a plan with the -target option, which means that the result
+of this plan may not represent all of the changes requested by the current
+configuration.
+
+The -target option is not for routine use, and is provided only for
+exceptional situations such as recovering from errors or mistakes, or when
+Terraform specifically suggests to use it as part of an error message.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+kubernetes_service.webapplication-service: Destroying... [id=default/webapplication-service]
+kubernetes_service.webapplication-service: Destruction complete after 0s
+kubernetes_deployment.webapplication-deploy: Destroying... [id=webapplication/webapplication]
+kubernetes_deployment.webapplication-deploy: Destruction complete after 0s
+kubernetes_namespace.webapplication-namespace: Destroying... [id=webapplication]
+kubernetes_namespace.webapplication-namespace: Still destroying... [id=webapplication, 10s elapsed]
+kubernetes_namespace.webapplication-namespace: Destruction complete after 13s
+
+Warning: Applied changes may be incomplete
+
+The plan was created with the -target option in effect, so some changes
+requested in the configuration may have been ignored and the output values may
+not be fully updated. Run the following command to verify that no other
+changes are pending:
+    terraform plan
+
+Note that the -target option is not suitable for routine use, and is provided
+only for exceptional situations such as recovering from errors or mistakes, or
+when Terraform specifically suggests to use it as part of an error message.
+
+
+Destroy complete! Resources: 3 destroyed.
+
+$ kubectl get all --all-namespaces -l team=42
+No resources found
+
+{{< / highlight >}}
+
+As we could see in this post Terraform offers a low friction way to perform day-by-day operations on a Kubernetes Cluster and helps to simplify the workflow of the development and operations teams.
+All the code that is shown in this post can be found at https://github.com/diegolakatos/blog-posts/tree/main/terraform-kubernetes
+
+Hope you enjoyed this post.
+
+Cheers
