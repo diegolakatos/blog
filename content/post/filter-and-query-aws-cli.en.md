@@ -5,6 +5,7 @@ Description: ""
 Tags: []
 Categories: []
 DisableComments: false
+draft: true
 ---
 The aws cli is a powerful tool to manage an aws account, with the CLI you can do things that are not possible when using the aws console
 
@@ -17,4 +18,4 @@ Fusce elit velit, efficitur non elementum vitae, ullamcorper quis nibh. Vivamus 
 
 Aliquam ligula arcu, tincidunt nec felis scelerisque, luctus ultricies ex. Donec libero quam, ultricies vitae mi et, malesuada sagittis urna. Vivamus suscipit orci et enim rutrum, et elementum velit pretium. Etiam ut nulla dictum, ornare mauris ac, mollis nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin dictum luctus augue, in aliquet sem consectetur ac. Vivamus pulvinar mi sed ultrices mattis. Maecenas vel tempor massa. In ut ligula elit. Nulla vel ullamcorper magna. Etiam turpis magna, ornare vitae ante non, fermentum lobortis nisi. Nullam nec ligula sit amet nulla molestie euismod vitae sit amet neque. Aliquam ultricies ultricies ipsum nec mollis. Cras odio risus, cursus sit amet sagittis sed, cursus vitae sapien. Pellentesque cursus massa sit amet tellus ornare, sed pharetra dolor vulputate.
 
-Etiam eget lorem et diam volutpat bibendum vulputate nec felis. Integer sed iaculis quam, in finibus nunc. Donec nec molestie purus, sit amet finibus tellus. Cras maximus tellus eu neque gravida vulputate. Maecenas augue leo, aliquam ut facilisis in, aliquet at augue. Integer rhoncus, leo sed vestibulum hendrerit, diam nunc fringilla sapien, vel varius ligula nisl vitae elit. Duis maximus eros sit amet rhoncus ultricies. Nulla ipsum erat, eleifend sit amet nisi quis, maximus lobortis nibh. Curabitur commodo est id turpis cursus, sed consectetur metus ullamcorper. In venenatis blandit metus, non venenatis ex semper ut. Fusce risus mi, pharetra quis eros nec, venenatis sodales lectus. 
+Etiam eget lorem et diam volutpat bibendum vulputate nec felis. Integer sed iaculis quam, in finibus nunc. Donec nec molestie purus, sit amet finibus tellus. Cras maximus tellus eu neque gravida vulputate. Maecenas augue leo, aliquam ut facilisis in, aliquet at augue. Integer rhoncus, leo sed vestibulum hendrerit, diam nunc fringilla sapien, vel varius ligula nisl vitae elit. Duis maximus eros sit amet rhoncus ultricies. Nulla ipsum erat, eleifend sit amet nisi quis, maximus lobortis nibh. Curabitur commodo est id turpis cursus, sed consectetur metus ullamcorper. In venenatis blandit metus, non venenatis ex semper ut. Fusce risus mi, pharetra quis eros nec, venenatis sodales lectus.
