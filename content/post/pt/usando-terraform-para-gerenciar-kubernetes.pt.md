@@ -2,7 +2,7 @@
 title: "Usando Terraform Para Gerenciar Kubernetes"
 date: 2021-01-01T00:00:00Z
 draft: false
-DisableComments: false
+DisableComments: true
 Description: "Este post mostra como usar o Terraform para gerenciar clusters Kubernetes"
 Tags: [Terraform, Kubernetes, IaC, Containers]
 Categories: [IaC]
