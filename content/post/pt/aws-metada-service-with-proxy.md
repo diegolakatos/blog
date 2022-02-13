@@ -1,5 +1,5 @@
 ---
-title: "It's not always DNS, having fun with proxies, AWS IAM Roles and a pinch of Terraform"
+title: "Nem sempre é DNS, diversão com proxies, AWS IAM roles e uma pitada de Terraform"
 date: 2022-02-12T12:33:53Z
 Description: ""
 Tags: []
@@ -7,13 +7,14 @@ Categories: []
 DisableComments: false
 draft: false
 ---
-While ago while working in a pipeline that was going to be used to create resources on AWS I faced a strange situation that led me to an interesting troubleshooting path.
+Há um tempo atrás, enquanto trabalhava em um pipeline que seria usado para criar recursos na AWS, enfrentei uma situação inusitada que me levou a uma investigão bastante interessante.
 
-The scenario was quite simple, an EC2 instance acting as a [gitlab-runner](https://docs.gitlab.com/runner/) executing a docker container that would download some terraform code from our git repository and run `terraform apply`. The EC2 instance had an IAM role attached that with all the necessary permissions to create the resources defined on the Terraform code.
+O cenário era bem simples, uma instância do EC2 atuando como um [gitlab-runner](https://docs.gitlab.com/runner/) executando um contêiner Docker que baixaria um código Terraform do nosso repositório e executaria `terraform apply`. A instância do EC2 tinha uma IAM role anexada com todas as permissões necessárias para criar os recursos definidos no código do Terraform.
 
-When everything was ready to go the pipeline was triggered and as soon `terraform apply` started to run...
+Quando tudo estava pronto, o pipeline foi acionado e assim que o `terraform apply` começou a ser executado...
 
-*Note: all snippets and examples below were created on my own AWS account and using my own code. I tried to recreate my thought process and actions as best as I could.*
+*Observação: todos os trechos e exemplos abaixo foram criados em minha própria conta da AWS e usando meu próprio código. Tentei recriar meu processo de pensamento e ações da melhor maneira possível.*
+
 {{< highlight bash "linenos=false,linenostart=1" >}}
 │ Error: error configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found.
 │
@@ -29,16 +30,14 @@ When everything was ready to go the pipeline was triggered and as soon `terrafor
 │    1: provider "aws"{
 │
 {{< / highlight >}}
-That's weird terraform is receiving a 404 when calling the instance metadata, that is used to retrieve information about roles attached to the instance and other useful information, it can be accessed on the address *http://169.254.169.254*.
-
-I double-checked the Terraform provider, and its configuration couldn't be simpler.
+Que estranho! O terraform está recebendo um 404 ao acessar os metadados da instância, que são usados para recuperar informações sobre a instância, como por exemplo a role anexada a ela, os metadado pode ser acessado no endereço *http://169.254.169.254*.
+Verifiquei novamente o provedor do Terraform e sua configuração não poderia ser mais simples.
 {{< highlight hcl "linenos=false,linenostart=1" >}}
 provider "aws"{
 region = "us-east-1"
 }
 {{< / highlight >}}
-Time to troubleshoot, I decided to first verify if everything was working on the instance before moving to the docker container, so I accessed the instance and ran some commands to check the connectivity with the metadata service and also to make sure that the role was correctly configured:
-
+Na hora de investigar, decidi primeiro verificar se tudo estava funcionando na instância antes de passar para o contêiner docker, então eu acessei a instância e executei alguns comandos para verificar a conectividade com o serviço de metadados e também para garantir que a role estava configurada corretamente:
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ curl http://169.254.169.254/latest/meta-data
 ami-id
@@ -71,7 +70,7 @@ services/
 2021-03-29 16:40:08 terraform-lakatos-state-3
 {{< / highlight >}}
 
-Everything looks good so let me try to use terraform to create something on aws:
+Tudo parece bom, então deixe-me tentar usar o terraform para criar algo na AWS:
 {{< highlight hcl "linenos=false,linenostart=1" >}}
 provider "aws"{
 region = "us-east-1"
@@ -132,13 +131,13 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 2022-02-13 13:06:02 lakatos-my-tf-test-bucket
 2021-03-29 16:40:08 terraform-lakatos-state-3
 {{< / highlight >}}
-That also worked, maybe is something wrong with the code that is going through the pipeline, to pull the code from the repository I had to configure a proxy using the `HTTP_PROXY` and `HTTP_PROXY` variables.
+Isso também funcionou, talvez seja algo errado com o código que está passando pelo pipeline, para puxar o código do repositório tive que configurar um proxy usando as variáveis `HTTP_PROXY` e `HTTP_PROXY`.
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ export HTTPS_PROXY=172.31.94.221:3128
 [ec2-user@ip-172-31-67-102 ~]$ export HTTP_PROXY=172.31.94.221:3128
 {{< / highlight >}}
-The pipeline was also configured to use proxy, otherwise it wouldn't be able to download the code from the repository.
-I cloned the repository and tried to run `terraform apply` again:
+O pipeline também foi configurado para usar proxy, caso contrário não seria possível baixar o código do repositório.
+Eu clonei o repositório e tentei executar o `terraform apply` novamente:
 {{< highlight bash "linenos=false,linenostart=1" >}}
 │ Error: error configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found.
 │
@@ -154,7 +153,7 @@ I cloned the repository and tried to run `terraform apply` again:
 │    1: provider "aws"{
 │
 {{< / highlight >}}
-That's not what I expected.... Let's run `curl` and `aws s3 ls` again:
+Não era isso que eu esperava... Vamos rodar `curl` e `aws s3 ls` novamente:
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ curl http://169.254.169.254/latest/meta-data
 ami-id
@@ -186,9 +185,9 @@ services/
 Unable to locate credentials. You can configure credentials by running "aws configure".
 {{< / highlight >}}
 
-That's odd...let's investigate a little further:
+Isso é estranho... vamos investigar um pouco mais:
 
-*I omitted some lines of the following outputs for clarity*
+*Eu omiti algumas linhas das seguintes para maior clareza*
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ aws s3 ls --debug
 
@@ -209,7 +208,7 @@ That's odd...let's investigate a little further:
 2022-02-13 18:14:21,115 - MainThread - botocore.utils - DEBUG - Metadata service returned non-200 response with status code of 404 for url: http://169.254.169.254/latest/meta-data/iam/security-credentials/, content body: <?xml version="1.0" encoding="iso-8859-1"?>
 
 {{< / highlight >}}
-We can see that the AWS CLI is trying to retrieve credentials following the precedence order explained on the [aws documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) and receives a 404, same error that is reported by Terraform, when tries to retrieve the iam-role, we can see that the AWS CLI is using the proxy that was previously configured and how about `curl`?
+Podemos ver que a AWS CLI está tentando recuperar credenciais seguindo a ordem de precedência explicada na [documentação da AWS](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) e recebe um 404, mesmo erro que é reportado pelo Terraform, ao tentar recuperar o iam-role, podemos ver que a AWS CLI está usando o proxy que foi configurado anteriormente e que tal `curl`?
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ curl http://169.254.169.254/latest/meta-data/iam/info -v
 *   Trying 169.254.169.254:80...
@@ -237,7 +236,7 @@ We can see that the AWS CLI is trying to retrieve credentials following the prec
 * Closing connection 0
 }
 {{< / highlight >}}
-Looks like it's not using the proxy after some thinking I remembered that curl don't use the variables `HTTP_PROXY` and `HTTPS_PROXY` in uppercase (more details can be found [here](https://everything.curl.dev/usingcurl/proxies/env)), so I set it to lowercase and tried again:
+Parece que não está usando o proxy depois de pensar um pouco, lembrei que o curl não usa as variáveis `HTTP_PROXY` e `HTTPS_PROXY` em maiúsculas (mais detalhes podem ser encontrados [aqui](https://everything.curl.dev/usingcurl /proxies/env)), então configurei para minúsculas e tentei novamente:
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ curl http://169.254.169.254/latest/meta-data/iam/info -v
 * Uses proxy env variable http_proxy == '172.31.94.221:3128'
@@ -274,9 +273,9 @@ Looks like it's not using the proxy after some thinking I remembered that curl d
 * Connection #0 to host 172.31.94.221 left intact
 
 {{< / highlight >}}
-Success!! I mean... fail =)
+Sucesso!! Quer dizer... falha =)
 
-Now we know that the proxy could be the cause of the problem, I don't want to unset the proxy because I'll need it later in my pipeline, instead I can just define the addresses that I want to access without going through the proxy:
+Agora sabemos que o proxy pode ser a causa do problema, não quero desconfigurar o proxy porque vou precisar dele mais tarde no meu pipeline, em vez disso, posso apenas definir os endereços que quero acessar sem passar pelo proxy:
 
 {{< highlight bash "linenos=false,linenostart=1" >}}
 [ec2-user@ip-172-31-67-102 ~]$ export NO_PROXY=169.254.169.254
@@ -343,7 +342,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 2021-03-29 16:40:08 terraform-lakatos-state-3
 {{< / highlight >}}
 
-Finally it is working as was intended.
+Finalmente está funcionando!!
 
-It's always amazing how simple things can lead to strange behaviours, and of course all of that could be avoided if I read the [aws documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-proxy.html)
+É sempre incrível como coisas simples podem levar a comportamentos estranhos e, claro, tudo isso poderia ser evitado se eu lesse a [documentação da AWS](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-proxy.html)
 ![Debug](/images/debug.jpeg)
