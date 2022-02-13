@@ -1,13 +1,13 @@
 ---
 title: "Nem sempre é DNS, diversão com proxies, AWS IAM roles e uma pitada de Terraform"
 date: 2022-02-12T12:33:53Z
-Description: ""
-Tags: []
-Categories: []
-DisableComments: false
+Description: "A historia de uma investigação"
 draft: false
+DisableComments: true
+Tags: [Terraform, AWS, IaC, Linux]
+Categories: [IaC]
 ---
-Há um tempo atrás, enquanto trabalhava em um pipeline que seria usado para criar recursos na AWS, enfrentei uma situação inusitada que me levou a uma investigão bastante interessante.
+Há um tempo atrás, enquanto trabalhava em um pipeline que seria usado para criar recursos na AWS, enfrentei uma situação inusitada que me levou a uma investigação bastante interessante.
 
 O cenário era bem simples, uma instância do EC2 atuando como um [gitlab-runner](https://docs.gitlab.com/runner/) executando um contêiner Docker que baixaria um código Terraform do nosso repositório e executaria `terraform apply`. A instância do EC2 tinha uma IAM role anexada com todas as permissões necessárias para criar os recursos definidos no código do Terraform.
 

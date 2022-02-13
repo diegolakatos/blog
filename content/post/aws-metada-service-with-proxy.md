@@ -1,11 +1,12 @@
 ---
 title: "It's not always DNS, having fun with proxies, AWS IAM Roles and a pinch of Terraform"
 date: 2022-02-12T12:33:53Z
-Description: ""
-Tags: []
-Categories: []
-DisableComments: false
+Description: "A troubleshooting story"
 draft: false
+DisableComments: true
+Tags: [Terraform, AWS, IaC, Linux]
+Categories: [IaC]
+---
 ---
 While ago while working in a pipeline that was going to be used to create resources on AWS I faced a strange situation that led me to an interesting troubleshooting path.
 
