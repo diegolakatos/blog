@@ -1,47 +1,167 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://determined-ardinghelli-91a6ea.netlify.app/categories/</loc>
+    <loc>https://blog.lakatoslab.info/tags/aws/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt-br"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/categories/"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/aws/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/categories/"
+                href="https://blog.lakatoslab.info/tags/aws/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://determined-ardinghelli-91a6ea.netlify.app/</loc>
+  </url><url>
+    <loc>https://blog.lakatoslab.info/categories/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt-br"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://determined-ardinghelli-91a6ea.netlify.app/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt-br"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/pt-br/tags/"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://determined-ardinghelli-91a6ea.netlify.app/tags/"
+                href="https://blog.lakatoslab.info/categories/"
                 />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/categories/iac/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/categories/iac/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/categories/iac/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/iac/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/iac/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/iac/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/post/aws-metada-service-with-proxy/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/linux/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/linux/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/linux/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/post/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/post/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/terraform/</loc>
+    <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/terraform/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/terraform/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/about/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/about/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/containers/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/containers/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/containers/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/tags/kubernetes/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://blog.lakatoslab.info/pt/tags/kubernetes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.lakatoslab.info/tags/kubernetes/"
+                />
+  </url><url>
+    <loc>https://blog.lakatoslab.info/post/using-terraform-to-manage-kubernetes/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url>
-  
 </urlset>

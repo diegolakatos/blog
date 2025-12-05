@@ -2,9 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Diego V Lakatos</title>
-    <link>https://determined-ardinghelli-91a6ea.netlify.app/tags/</link>
+    <link>https://blog.lakatoslab.info/tags/</link>
     <description>Recent content in Tags on Diego V Lakatos</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://determined-ardinghelli-91a6ea.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Feb 2022 12:33:53 +0000</lastBuildDate><atom:link href="https://blog.lakatoslab.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://blog.lakatoslab.info/tags/aws/</link>
+      <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/aws/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>IaC</title>
+      <link>https://blog.lakatoslab.info/tags/iac/</link>
+      <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/iac/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://blog.lakatoslab.info/tags/linux/</link>
+      <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/linux/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Terraform</title>
+      <link>https://blog.lakatoslab.info/tags/terraform/</link>
+      <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/terraform/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Containers</title>
+      <link>https://blog.lakatoslab.info/tags/containers/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/containers/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://blog.lakatoslab.info/tags/kubernetes/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/tags/kubernetes/</guid>
+      
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>

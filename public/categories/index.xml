@@ -2,9 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Diego V Lakatos</title>
-    <link>https://determined-ardinghelli-91a6ea.netlify.app/categories/</link>
+    <link>https://blog.lakatoslab.info/categories/</link>
     <description>Recent content in Categories on Diego V Lakatos</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://determined-ardinghelli-91a6ea.netlify.app/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Feb 2022 12:33:53 +0000</lastBuildDate><atom:link href="https://blog.lakatoslab.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IaC</title>
+      <link>https://blog.lakatoslab.info/categories/iac/</link>
+      <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
+      
+      <guid>https://blog.lakatoslab.info/categories/iac/</guid>
+      
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>

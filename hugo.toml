@@ -1,21 +1,16 @@
-baseURL = "https://diegovlakatos.cloud"
+baseURL = "https://blog.lakatoslab.info"
 languageCode = "en"
 DefaultContentLanguage = "en"
 title = "Diego Verissimo Lakatos' blog"
-theme = "anatole"
+theme = "hugo-blog-awesome"
 summarylength = 10
 enableEmoji = true
 enableRobotsTXT = true
 
-# Enable Disqus
-#disqusShortname = "diegovlakatos-cloud.disqus.com"
-
-# Google Analytics
-#googleAnalytics = "UA-123-45"
 
 [params]
 title = "Diego Verissimo Lakatos' blog"
-author = "Diego Verissimo Lakatos"
+
 description = "Blog about DevOps, Cloud Computing and containers"
 profilePicture = "images/profile.jpg"
 keywords = ""
@@ -24,11 +19,11 @@ customCss = []
 customJs = []
 mainSections = ["post"]
 images = ["images/site-feature-image.png"]
-# Google Site Verification
-#googleSiteVerify = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 #staticDir = ["images"]
-
+[params.author]
+  name = "Diego Verissimo Lakatos"
+  email = "uiodwhu@hnuidhw.com"
 ## Math settings
 [params.math]
 enable = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
