@@ -7,6 +7,9 @@ summarylength = 10
 enableEmoji = true
 enableRobotsTXT = true
 
+[module]
+  [[module.imports]]
+    path = "github.com/hugo-sid/hugo-blog-awesome"
 
 [params]
 title = "Diego Verissimo Lakatos' blog"
