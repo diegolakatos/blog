@@ -9,7 +9,7 @@ enableRobotsTXT = true
 
 [module]
   [[module.imports]]
-    path = "github.com/hugo-sid/hugo-blog-awesome"
+    path = 'github.com/hugo-sid/hugo-blog-awesome'
 
 [params]
 title = "Diego Verissimo Lakatos' blog"
