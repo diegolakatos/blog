@@ -98,7 +98,7 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Diego Lakatos"
   name = "Diego Lakatos"
-  description = "SRE/DevOps/Sysadmin with more than 10 years of experience"
+  description = "Blog about Linux, DevOps, SRE and Homelab. SRE/DevOps/Sysadmin with more than 10 years of experience"
 
 # Allow to override webmanifest options
 [Languages.en.params.webmanifest]
@@ -141,7 +141,7 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
   # You can take a look at layouts/index.html for more information.
-  description = "Blog sobre Linux, DevOps, SRE e Homelab"
+  description = "Blog sobre Linux, DevOps, SRE e Homelab. SRE/DevOps/SysAdmin com mais de 10 anos de experiência."
   mainSections = ['posts']
   toc = false # set to false to disable table of contents 'globally'
   tocOpen = false # set to true to open table of contents by default
@@ -163,7 +163,7 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Diego Lakatos"
   name = "Diego Lakatos"
-  description = "SRE/DevOps/SysAdmin com mais de 10 anos de experiência"
+  description = "Blog sobre Linux, DevOps, SRE e Homelab. SRE/DevOps/SysAdmin com mais de 10 anos de experiência."
 
 # Allow to override webmanifest options
 [Languages.pt-br.params.webmanifest]
