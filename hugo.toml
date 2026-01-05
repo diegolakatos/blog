@@ -165,7 +165,7 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Diego Lakatos"
   name = "Diego Lakatos"
-  description = "Um tema Hugo veloz e minimalista com suporte a modo claro e escuro para rodar um blog ou site pessoal"
+  description = "U tema Hugo veloz e minimalista com suporte a modo claro e escuro para rodar um blog ou site pessoal"
 
 # Allow to override webmanifest options
 [Languages.pt-br.params.webmanifest]
