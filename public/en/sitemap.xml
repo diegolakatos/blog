@@ -6,8 +6,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/aws/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/aws/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -19,8 +19,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/categories/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -32,8 +32,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -45,8 +45,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/categories/iac/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/categories/iac/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -58,8 +58,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/iac/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/iac/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -67,15 +67,25 @@
                 href="http://localhost:1313/tags/iac/"
                 />
   </url><url>
-    <loc>http://localhost:1313/post/aws-metada-service-with-proxy/</loc>
+    <loc>http://localhost:1313/posts/aws-metada-service-with-proxy/</loc>
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/posts/aws-metada-service-with-proxy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/posts/aws-metada-service-with-proxy/"
+                />
   </url><url>
     <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/linux/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/linux/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -83,25 +93,25 @@
                 href="http://localhost:1313/tags/linux/"
                 />
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/post/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/post/"
+                href="http://localhost:1313/posts/"
                 />
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -113,8 +123,8 @@
     <lastmod>2022-02-12T12:33:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/terraform/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/terraform/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -122,25 +132,25 @@
                 href="http://localhost:1313/tags/terraform/"
                 />
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://localhost:1313/pages/about/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/about/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/pages/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/about/"
+                href="http://localhost:1313/pages/about/"
                 />
   </url><url>
     <loc>http://localhost:1313/tags/containers/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/containers/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/containers/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -152,8 +162,8 @@
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="pt"
-                href="http://localhost:1313/pt/tags/kubernetes/"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/tags/kubernetes/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -161,7 +171,30 @@
                 href="http://localhost:1313/tags/kubernetes/"
                 />
   </url><url>
-    <loc>http://localhost:1313/post/using-terraform-to-manage-kubernetes/</loc>
+    <loc>http://localhost:1313/pages/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/pages/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/pages/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/posts/using-terraform-to-manage-kubernetes/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt-br"
+                href="http://localhost:1313/pt-br/posts/using-terraform-to-manage-kubernetes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/posts/using-terraform-to-manage-kubernetes/"
+                />
   </url>
 </urlset>

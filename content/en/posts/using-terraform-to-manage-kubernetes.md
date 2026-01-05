@@ -1,23 +1,23 @@
 ---
-title: "Usando Terraform Para Gerenciar Kubernetes"
+title: "Using Terraform to manage Kubernetes"
 date: 2021-01-01T00:00:00Z
 draft: false
 DisableComments: true
-Description: "Este post mostra como usar o Terraform para gerenciar clusters Kubernetes"
+Description: "This post shows how to use Terraform to manage Kubernetes clusters"
 Tags: [Terraform, Kubernetes, IaC, Containers]
 Categories: [IaC]
+language: en
 ---
-Ao trabalhar com kubernetes, a maneira padrão de criar objetos tais quais *pods*, *deployments* e *services* é criar um arquivo de manifesto, normalmente em yaml, que descreva o estado desejado e, em seguida, usar ```kubectl``` para realizar a criação ou atualização o objeto.
+When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use ```kubectl``` to create/update the object.
+Althought, straightforward this process might create a barrier for developers and operations teams that now have to mantain a new codebase in a new "language". YAML is easy to read but troubleshooting it might be difficult due the need for correct identation and the errors that are exibithed by ```kubectl``` might not be easily understood.
+If a team is already using Terraform to create and manage the infrastructure it makes sense to use it to create the objects inside kubernetes as well, this brings some advantages such as:
 
-Apesar de tudo, esse processo simples pode criar uma barreira para desenvolvedores e equipes de operações que agora precisam manter uma nova base de código em uma nova "linguagem". O YAML é fácil de ler, mas solucionar o problema pode ser difícil devido à necessidade de identificação correta e os erros exibidos pelo ```kubectl``` podem não ser facilmente compreendidos.
-Se uma equipe já está usando o Terraform para criar e gerenciar a infraestrutura, faz sentido usá-lo para criar os objetos dentro do kubernetes, isso traz algumas vantagens, como:
+- A single workflow to administer both the underlying infrastructure and the cluster itself
+- Easly templating without the need to use tools like ``helm``,
+- Lifecycle management without the need to check the Kubernetes' API
+- Terraform is capable of understanding the relationship between resources, if a resource has dependencies that failed to create Terraform will understand this and don't create the resource or if you delete an object that has dependencies the dependencies will also be deleted.
 
-- Um único fluxo de trabalho para administrar a infraestrutura subjacente e o próprio cluster
-- Modelagem fácil sem a necessidade de usar ferramentas como o ``helm``,
-- Gerenciamento do ciclo de vida sem a necessidade de verificar a API do Kubernetes
-- O Terraform é capaz de entender a relação entre recursos, se um recurso tiver dependências que não conseguiram criar o Terraform entenderá isso e não criar o recurso ou se você excluir um objeto que possui dependências, as dependências também serão excluídas.
-
-Feitas todas essas considerações, vamos começar a trabalhar. A primeira etapa é configurar o *provider* do kubernetes:
+With all these considerations done let's start working. The first step is to configure the kubernetes provider:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 terraform {
@@ -31,7 +31,8 @@ terraform {
 provider "kubernetes" {}
 {{< / highlight >}}
 
-Agora, para criar um *pod*, podemos usar o seguinte arquivo:
+Now to create  a pod we can use the following file:
+
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 resource "kubernetes_pod" "pod" {
@@ -49,7 +50,7 @@ resource "kubernetes_pod" "pod" {
 }
 {{< / highlight >}}
 
-Para aplicá-lo, basta executar:
+To apply it just run:
 
 {{< highlight bash "linenos=table,linenostart=1">}}
 $ terraform apply
@@ -69,7 +70,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 {{< / highlight >}}
 
-Também é possível criar estruturas mais elaboradas, no próximo exemplo vamos explorar o grafo de dependências que o Terraform usa para gerenciar os recursos, para isso vamos criar 3 objetos: um namespace, um *deployment* e um *service*:
+It's also possible to create more elaborated structures, in the next example we are going to explore the dependency graph that Terraform uses to manage the resources, for this we are going to create 3 objects: one namespace, one deployment and one service:
 
 {{< highlight hcl "linenos=table,linenostart=1" >}}
 resource "kubernetes_namespace" "webapplication-namespace" {
@@ -140,10 +141,15 @@ resource "kubernetes_service" "webapplication-service" {
     port {
       port        = 8080
       target_port = 80
+    }
 
+    type = "NodePort"
+  }
+  depends_on = [kubernetes_namespace.webapplication-namespace]
+}
 {{< / highlight >}}
 
-Como todos os recursos têm os mesmos rótulos, podemos usar o comando ```kubectl``` para inspecionar o estado do cluster antes e depois do ``terraform apply``
+Since all resources have the same labels we can use the ```kubectl``` command to inspect the state of the cluster before and after the ``terraform apply``:
 
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
@@ -157,7 +163,7 @@ kube-public       Active   160d
 kube-system       Active   160d
 {{< / highlight >}}
 
-agora para criar os objetos:
+now to create the resources:
 
 {{< highlight bash >}}
 $ terraform apply -auto-approve
@@ -172,7 +178,7 @@ kubernetes_deployment.webapplication-deploy: Creation complete after 4s [id=weba
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 {{< / highlight >}}
 
-Para confirmar a criação:
+To confirm the creation:
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
@@ -198,8 +204,8 @@ kube-system       Active   160d
 webapplication    Active   106s
 {{< / highlight >}}
 
-Como mencionado antes, o Terraform é capaz de entender as relações entre diferentes recursos, isso nos permitirá excluir completamente todos os recursos que criamos com um único comando, mesmo nos casos em que o kubernetes não o faria.
-Suponha que desejemos excluir o namespace do aplicativo da web e todos os recursos que têm qualquer tipo de associação com ele, se executarmos o comando ``kubectl delete ns webapplication`` o namespace e a implantação serão excluídos, no entanto, o serviço que foi criado em outro namespace não será afetado:
+As mentioned before Terraform is able to understand the relations between different resources, this will allow us to completely delete all the resources that we created with a single command even in cases where kubernetes would not delete by itself.
+Suppose that we want to delete the webapplication namespace and all the resources that have any kind of association with it, if we run  ``kubectl delete ns webapplication`` command the namespace and the deployment will be deleted, however the service that was created in another namespace won't be affected:
 
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
@@ -225,7 +231,8 @@ NAMESPACE   NAME                             TYPE       CLUSTER-IP      EXTERNAL
 default     service/webapplication-service   NodePort   10.106.212.15   <none>        8080:30498/TCP   8m34s
 {{< / highlight >}}
 
-Mas em nosso código Terraform, temos uma dependência explícita  entre o *namespace* e o *service*, portanto, é possível excluir tudo em um comando:
+But on our Terraform code we explicit dependence between the namespace and the service, therefore it's possible to delete everything in one command:
+
 {{< highlight bash >}}
 $ kubectl get all --all-namespaces -l team=42
 NAMESPACE        NAME                                  READY   STATUS    RESTARTS   AGE
@@ -435,12 +442,12 @@ Destroy complete! Resources: 3 destroyed.
 
 $ kubectl get all --all-namespaces -l team=42
 No resources found
+
 {{< / highlight >}}
 
-Como pudemos ver nesta postagem, o Terraform oferece uma maneira simples de realizar operações diárias em um cluster do Kubernetes e ajuda a simplificar o fluxo de trabalho das equipes de desenvolvimento e operações.
-Todos os códigos apresentados nesse post podem ser encontrados em https://github.com/diegolakatos/blog-posts/tree/main/terraform-kubernetes
+As we could see in this post Terraform offers a low friction way to perform day-by-day operations on a Kubernetes Cluster and helps to simplify the workflow of the development and operations teams.
+All the code that is shown in this post can be found at https://github.com/diegolakatos/blog-posts/tree/main/terraform-kubernetes
 
+Hope you enjoyed this post.
 
-Espero que você tenha gostado desse post.
-
-Abraços
+Cheers

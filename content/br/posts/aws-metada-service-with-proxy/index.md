@@ -6,6 +6,7 @@ draft: false
 DisableComments: true
 Tags: [Terraform, AWS, IaC, Linux]
 Categories: [IaC]
+language: pt-br
 ---
 Há um tempo atrás, enquanto trabalhava em um pipeline que seria usado para criar recursos na AWS, enfrentei uma situação inusitada que me levou a uma investigação bastante interessante.
 
