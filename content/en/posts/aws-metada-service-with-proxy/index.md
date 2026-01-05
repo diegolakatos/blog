@@ -6,7 +6,7 @@ draft: false
 DisableComments: true
 Tags: [Terraform, AWS, IaC, Linux]
 Categories: [IaC]
----
+language: en
 ---
 While ago while working in a pipeline that was going to be used to create resources on AWS I faced a strange situation that led me to an interesting troubleshooting path.
 

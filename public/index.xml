@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Diego V Lakatos</title>
+    <title>Diego Lakatos</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Diego V Lakatos</description>
+    <description>Recent content on Diego Lakatos</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 12 Feb 2022 12:33:53 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>It&#39;s not always DNS, having fun with proxies, AWS IAM Roles and a pinch of Terraform</title>
-      <link>http://localhost:1313/post/aws-metada-service-with-proxy/</link>
+      <link>http://localhost:1313/posts/aws-metada-service-with-proxy/</link>
       <pubDate>Sat, 12 Feb 2022 12:33:53 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/aws-metada-service-with-proxy/</guid>
+      <guid>http://localhost:1313/posts/aws-metada-service-with-proxy/</guid>
       
-      <description>&lt;hr&gt;
-&lt;p&gt;While ago while working in a pipeline that was going to be used to create resources on AWS I faced a strange situation that led me to an interesting troubleshooting path.&lt;/p&gt;</description>
+      <description>&lt;p&gt;While ago while working in a pipeline that was going to be used to create resources on AWS I faced a strange situation that led me to an interesting troubleshooting path.&lt;/p&gt;
+&lt;p&gt;The scenario was quite simple, an EC2 instance acting as a &lt;a href=&#34;https://docs.gitlab.com/runner/&#34;&gt;gitlab-runner&lt;/a&gt; executing a docker container that would download some terraform code from our git repository and run &lt;code&gt;terraform apply&lt;/code&gt;. The EC2 instance had an IAM role attached that with all the necessary permissions to create the resources defined on the Terraform code.&lt;/p&gt;</description>
       
     </item>
     
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>http://localhost:1313/pages/about/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>http://localhost:1313/pages/about/</guid>
       
       <description>&lt;p&gt;Hi, my name is Diego Verissimo Lakatos and in this blog I expect to share my knowledge and also learn new things.
 My areas of interests are cloud computing, containers, Linux and Infrastructure as code.
@@ -34,10 +34,10 @@ In my free time I like to read, watch movies and play video-games.&lt;/p&gt;</de
     
     <item>
       <title>Using Terraform to manage Kubernetes</title>
-      <link>http://localhost:1313/post/using-terraform-to-manage-kubernetes/</link>
+      <link>http://localhost:1313/posts/using-terraform-to-manage-kubernetes/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/using-terraform-to-manage-kubernetes/</guid>
+      <guid>http://localhost:1313/posts/using-terraform-to-manage-kubernetes/</guid>
       
       <description>&lt;p&gt;When working with kubernetes the standard way to create objects such as pods, deployments and services is to create a yaml manifest file that describes the desired state and then use &lt;code&gt;kubectl&lt;/code&gt; to create/update the object.
 Althought, straightforward this process might create a barrier for developers and operations teams that now have to mantain a new codebase in a new &amp;ldquo;language&amp;rdquo;. YAML is easy to read but troubleshooting it might be difficult due the need for correct identation and the errors that are exibithed by &lt;code&gt;kubectl&lt;/code&gt; might not be easily understood.
