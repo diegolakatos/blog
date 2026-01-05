@@ -1,5 +1,5 @@
 title = "Diego Lakatos"
-baseURL = 'https://lakatoslab.info'
+baseURL = 'https://blog.lakatoslab.info'
 
 # This is what goes in <html lang="">
 languageCode = 'en-us'
