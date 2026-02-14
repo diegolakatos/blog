@@ -28,4 +28,5 @@ The goals of this "project" are:
 
 In this first post I will demonstrate how I installed Talos on my Proxmox cluster.
 
-![1](/images/talos-pt1/1.png)
+{{< lightbox src="/images/talos-pt1/1.png" alt="1" width="800" class="full-bleed">}}
+{{< lightbox src="/images/talos-pt1/2.png" alt="1" width="800" class="full-bleed">}}

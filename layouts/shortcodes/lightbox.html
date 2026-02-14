@@ -1,0 +1,9 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $caption := .Get "caption" | default $alt }}
+{{ $width := .Get "width" | default "100%" }}
+
+{{ $class := .Get "class" | default "" }}
+<a href="{{ $src }}" data-caption="{{ $caption }}">
+  <img src="{{ $src }}" alt="{{ $alt }}" width="{{ $width }}" class="{{ $class }}" style="max-width: 100%; height: auto;">
+</a>
