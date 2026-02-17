@@ -1,0 +1,13 @@
+<!-- baguetteBox.js CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css" />
+<!-- baguetteBox.js JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    baguetteBox.run('main .page-content', {
+      captions: function(element) {
+        return element.getAttribute('data-caption');
+      }
+    });
+  });
+</script>
