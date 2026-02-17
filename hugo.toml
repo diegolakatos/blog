@@ -39,6 +39,10 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
     noClasses = false
   [markup.goldmark.renderer]
     unsafe = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
 	[markup.tableOfContents]
 		startLevel = 2 # ToC starts from H2
 		endLevel = 4 # ToC ends at H4
