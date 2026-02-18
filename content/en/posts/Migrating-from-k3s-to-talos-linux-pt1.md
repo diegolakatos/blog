@@ -1,5 +1,5 @@
 ---
-date : '2026-02-17T16:50:09Z'
+date : '2026-02-18T09:50:09Z'
 draft : false
 title : 'Migrating From K3s to Talos Linux Pt.1'
 Description : "How I migrate a single node k3s cluster to a multinode cluster using Talos Linux"
@@ -8,7 +8,7 @@ Tags : "[Kubernetes, Containers, HomeLab, Linux]"
 Categories : [IaC]
 language : en
 ---
-I'm a big fan of homelabing and self-hosting. As an IT professional I think it is important to have a place where I can test new things and learn, specially those things that are not directly related with your current job. I also like to keep my personal stuff private and don't rely on big companies that constantly rug-pulls its customers, enshification is here to stay and will only get worse, without mentioning using our data to train AI models.
+I'm a big fan of homelabing and self-hosting. As an IT professional I think it is important to have a place where I can test new things and learn, specially those things that are not directly related with your current job. I also like to keep my personal stuff private and don't rely on big companies that constantly rug-pulls its customers, [*enshittification*](https://en.wikipedia.org/wiki/Enshittification) is here to stay and will only get worse, without mentioning using our data to train AI models.
 
 In my homelab most of the services where I keep valuable data, such as photos, has its unique virtual machine that may use containers to run the application (using a docker-compose file) or the application is installed using another method, the VMs are deployed in a two-node proxmox cluster.
 All services have its own certificate generated using Let's Encrypt and are accessible through Tailscale.
@@ -38,7 +38,7 @@ Now I choose the version, in this case it is 1.12.2.
 
 {{< lightbox src="/images/talos-pt1/2.png" alt="1" width="800" class="full-bleed">}}
 
-Since I choose "Cloud server" now I have to choose what kind of cloud I'm using, the list here is quite compreensive with many of the main cloud providers listed, in my case I will choose "Nocloud".
+Since I choose "Cloud server" now I have to choose what kind of cloud I'm using, the list here is quite comprehensive with many of the main cloud providers listed, in my case I will choose "Nocloud".
 
 {{< lightbox src="/images/talos-pt1/3.png" alt="1" width="800" class="full-bleed">}}
 
@@ -59,6 +59,7 @@ Finally you have the address to download the image, it also provides addresses a
 {{< lightbox src="/images/talos-pt1/8.png" alt="1" width="800" class="full-bleed">}}
 
 You can download the ISO image with the provided link but since I'm using proxmox I think it is easier to upload it directly to proxmox, [this article shows how to do it](https://www.thomas-krenn.com/en/wiki/Proxmox_upload_ISO_image). With the ISO uploaded just create a virtual machine (or several in this case) and start them, after booting you should be able to see something like this:
+
 {{< lightbox src="/images/talos-pt1/9.png" alt="1" width="800" class="full-bleed">}}
 
 With that we are ready to configure and bootstrap the cluster, which will be done in part 2, see you soon!
